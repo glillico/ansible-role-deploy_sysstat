@@ -1,2 +1,34 @@
 ---
 # tasks file for ansible-role-deploy_sysstat
+
+- name: Update apt cache.
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 600
+  when: ansible_os_family == 'Debian'
+
+- name: Define dsys_package_name.
+  ansible.builtin.set_fact:
+    dsys_package_name: "{{ __dsys_package_name }}"
+  when: dsys_package_name is not defined
+
+- name: Define dsys_service_name.
+  set_fact:
+    dsys_service_name: "{{ __dsys_service_name }}"
+  when: dsys_service_name is not defined
+
+- name: Ensure the systat package is installed.
+  ansible.builtin.package:
+    name: "{{ dsys_package_name }}"
+    state: present
+    update_cache: true
+  notify: Restart systat service
+
+- name: Enable systat on Debian based OS's
+  ansible.builtin.lineinfile:
+    path: /etc/default/sysstat
+    regexp: "^ENABLED="
+    line: ENABLED="true"
+    state: present
+  notify: Restart systat service
+  when: ansible_os_family == 'Debian'
