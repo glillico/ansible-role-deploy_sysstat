@@ -1,0 +1,20 @@
+---
+- name: Verify
+  hosts: all
+
+  tasks:
+  - name: Include variables.
+    include_vars: "vars/main.yml"
+
+  - name: Check the sysstat package status.
+    package:
+      name: '{{ item }}'
+      state: present
+    check_mode: yes
+    register: pkg_status
+    with_items: "{{ dsys_package_name }}"
+
+  - name: Check the sysstat package is installed.
+    assert:
+      that:
+        - not pkg_status.changed
