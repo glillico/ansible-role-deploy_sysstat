@@ -7,16 +7,6 @@
     cache_valid_time: 600
   when: ansible_os_family == 'Debian'
 
-- name: Define dsys_package_name.
-  ansible.builtin.set_fact:
-    dsys_package_name: "{{ __dsys_package_name }}"
-  when: dsys_package_name is not defined
-
-- name: Define dsys_service_name.
-  set_fact:
-    dsys_service_name: "{{ __dsys_service_name }}"
-  when: dsys_service_name is not defined
-
 - name: Ensure the systat package is installed.
   ansible.builtin.package:
     name: "{{ dsys_package_name }}"

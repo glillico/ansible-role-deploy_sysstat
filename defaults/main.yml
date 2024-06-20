@@ -1,6 +1,6 @@
 ---
 # defaults file for ansible-role-deploy_sysstat
 
-__dsys_service_name: sysstat
-__dsys_package_name: sysstat
+dsys_service_name: sysstat
+dsys_package_name: sysstat
 dsys_service_enable: true
