@@ -1,38 +1,36 @@
-Role Name
-=========
+# Ansible Role : deploy_sysstat
 
-A brief description of the role goes here.
+[![CI](https://github.com/glillico/ansible-role-deploy_sysstat/workflows/CI/badge.svg)](https://github.com/glillico/ansible-role-deploy_sysstat/actions?query=workflow%3ACI)
 
-Requirements
-------------
+Installs and configures sysstat.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+None.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Role Variables
 
-Dependencies
-------------
+### defaults/main.yml
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+|Variable|Description|
+|---|---|
+|dsys_service_name|The name of the systemd service.|
+|dsys_package_name|The name of the sysstat package to install.|
+|dsys_service_enable|Enable and start the sysstat service when set to `true`.|
 
-Example Playbook
-----------------
+## Dependencies
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+None.
+## Example Playbook
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+        - glillico.deploy_sysstat
 
-License
--------
+## License
 
-BSD
+MIT
 
-Author Information
-------------------
+## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Created in 2024 by Graham Lillico.
